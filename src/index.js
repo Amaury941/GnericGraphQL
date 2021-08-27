@@ -78,23 +78,24 @@ const resolvers = {
         },
         // argumentos: id do pai
         addSon: (_,args) => {
-            if (fathers.find((user)=> user._id === args.FatherId) != Null){
-                const newSon = {
-                    _id  : String(args.FatherId + "'" +'s son'),
-                    name : args.name,
-                    age  : args.age
-                };
+            const foundFather = fathers.find((user)=> user._id === args.FatherId)
+            if (foundFather == null){ return foundFather }
 
-                const newFather = {
-                    _id  : String(args.FatherId),
-                    name : fathers.find((user)=> user._id === args.FatherId).name,
-                    age  : fathers.find((user)=> user._id === args.FatherId).age,
-                    son  : newSon
-                };
+            const newSon = {
+                _id  : String(args.FatherId + "'" +'s son'),
+                name : args.name,
+                age  : args.age
+            };
 
-                fathers.splice(parseInt(args.FatherId),1,newFather)
-                return newSon;
-           } else {return Null}
+            const newFather = {
+                _id  : String(args.FatherId),
+                name : foundFather.name,
+                age  : foundFather.age,
+                son  : newson
+            };
+
+            fathers.splice(parseInt(args.FatherId),1,foundFather);
+            return newSon;
         },
     },
 };
