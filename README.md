@@ -19,4 +19,7 @@
 
 <h4> Execução:<h4>
   <p> em um terminal no diretório do projeto, digite: node src/index.js </p>
+
+# Obs:
+  vídeo explicatório em "explanation-video"
   
