@@ -15,3 +15,7 @@
 <p>
   O que entregar? Um video contendo a explicação do código desenvolvido, além da execução da solução, demonstrando como o GraphQL funciona na prática.
 </p>
+
+
+<h4> Execução <h4>
+  <p> node src/index.js </p>
