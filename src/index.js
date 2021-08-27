@@ -5,7 +5,7 @@ const {ApolloServer, gql} =  require('apollo-server');
 const typeDefs = gql`
     type Query {
         genesysOne: String
-        getFathers:[Father!]!
+        getFathers:[Father]!
         getFatherById(id: String!):Father
     }
 
@@ -14,7 +14,6 @@ const typeDefs = gql`
         name : String!
         age  : Int!
         son  : Son
-        skipSon: Boolean!
     }
 
     type Son {
@@ -33,7 +32,7 @@ const typeDefs = gql`
             FatherId: String!,
             name: String!,
             age: Int!,
-        ): Son!,
+        ): Son,
 
         removeFather(
             FatherId: String!
@@ -79,21 +78,23 @@ const resolvers = {
         },
         // argumentos: id do pai
         addSon: (_,args) => {
-            const newSon = {
-                _id  : String(args.FatherId + "'" +'s son'),
-                name : args.name,
-                age  : args.age
-            };
+            if (fathers.find((user)=> user._id === args.FatherId) != Null){
+                const newSon = {
+                    _id  : String(args.FatherId + "'" +'s son'),
+                    name : args.name,
+                    age  : args.age
+                };
 
-            const newFather = {
-                _id  : String(args.FatherId),
-                name : fathers.find((user)=> user._id === args.FatherId).name,
-                age  : fathers.find((user)=> user._id === args.FatherId).age,
-                son  : newSon
-            };
+                const newFather = {
+                    _id  : String(args.FatherId),
+                    name : fathers.find((user)=> user._id === args.FatherId).name,
+                    age  : fathers.find((user)=> user._id === args.FatherId).age,
+                    son  : newSon
+                };
 
-            fathers.splice(parseInt(args.FatherId),1,newFather)
-            return newSon;
+                fathers.splice(parseInt(args.FatherId),1,newFather)
+                return newSon;
+           } else {return Null}
         },
     },
 };
