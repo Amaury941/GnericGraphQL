@@ -17,5 +17,6 @@
 </p>
 
 
-<h4> Execução <h4>
-  <p> node src/index.js </p>
+<h4> Execução:<h4>
+  <p> em um terminal no diretório do projeto, digite: <script> node src/index.js </script> </p>
+  
